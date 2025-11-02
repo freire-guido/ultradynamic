@@ -41,6 +41,18 @@ export default function JoinPage() {
                 informally through our contact channels.
               </p>
             </div>
+
+            {/* Application Link */}
+            <div className="pt-4">
+              <a
+                href="https://ultradynamic.typeform.com/to/YOUR_FORM_ID"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-8 py-4 bg-black text-white hover:bg-black/90 transition-colors duration-200 text-base font-medium"
+              >
+                Submit Application
+              </a>
+            </div>
             
             <div className="pt-8">
               <p className="text-black/60 mb-6">

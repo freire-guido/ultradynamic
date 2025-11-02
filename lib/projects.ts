@@ -20,7 +20,7 @@ export const projects: Project[] = [
     id: "ultragaucho",
     name: "Ultragaucho",
     shortDescription: "Advancing regional AI capabilities through rigorous evaluation and quality datasets.",
-    longDescription: "Building the tools and infrastructure needed to ensure AI systems understand and reflect regional contexts. We create benchmarks, evaluations, and datasets that enable culturally-aware and linguistically-competent models.",
+    longDescription: "Ultragaucho seeks to expand the understanding of LLMs in rioplatense tasks and reasoning to boost cultural awareness. We are working with OMA (Olimpiada Matemática Argentina) question sets to create a regional math dataset, HCDN (Honorable Cámara de Diputados de la Nación) to collect transcripts, laws, and related materials to inform models of local policy and rhetoric.",
     tags: ["AI Evaluation", "Benchmarks", "LLMs"],
     githubLinks: [
       "https://github.com/freire-guido/trucobench",
