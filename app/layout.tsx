@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Ultradynamic Systems",
-  description: "Transforming industries through intelligent automation",
+  description: "Making everything smarter with AI",
 };
 
 export default function RootLayout({

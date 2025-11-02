@@ -28,11 +28,11 @@ export default function Home() {
       <section className="pt-40 pb-24 px-8">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight mb-10 leading-[1.05]">
-            Transforming industries through intelligent automation
+            Making everything smarter with AI
           </h1>
           <p className="text-lg md:text-xl text-black/50 max-w-2xl leading-relaxed">
-            Ultradynamic Systems is an umbrella company building cutting-edge solutions 
-            across logistics, AI evaluation, education, and AI safety.
+            Ultradynamic Systems builds intelligent systems that push people and processes 
+            to be smarter, more capable, and more effective.
           </p>
         </div>
       </section>

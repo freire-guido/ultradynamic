@@ -33,19 +33,19 @@ export default function AboutPage() {
           <div className="space-y-8 text-lg leading-relaxed text-black/60">
             <p>
               Ultradynamic Systems is a team of highly motivated engineers, researchers, and entrepreneurs 
-              working at the intersection of artificial intelligence, automation, and industrial transformation.
+              working at the intersection of artificial intelligence, automation, and intelligent systems.
             </p>
             
             <p>
-              We believe that intelligent systems have the power to fundamentally reshape how industries 
-              operate. Our approach combines cutting-edge research with practical implementation, ensuring 
-              that theoretical advances translate into real-world impact.
+              We believe that AI has the power to make everything smarter—from how people learn and work, 
+              to how systems operate and adapt. Our approach combines cutting-edge research with practical 
+              implementation, ensuring that theoretical advances translate into real-world impact.
             </p>
             
             <p>
-              Each of our projects represents a deliberate bet on a specific transformation—whether it's 
-              autonomous retail operations, culturally-aware AI systems, incentive-aligned education, or 
-              safety-oriented control mechanisms.
+              Each of our projects represents a deliberate bet on making specific domains smarter and more 
+              capable—whether it's autonomous retail operations, culturally-aware AI systems, incentive-aligned 
+              education, or safety-oriented control mechanisms.
             </p>
             
             <p>

@@ -1,6 +1,6 @@
 # Ultradynamic Systems
 
-Ultradynamic Systems is an umbrella company transforming industries through intelligent automation. We build cutting-edge solutions across logistics, AI evaluation, education, and AI safety.
+Ultradynamic Systems builds intelligent systems that push people and processes to be smarter, more capable, and more effective. We work across logistics, AI evaluation, education, and AI safety.
 
 ## Projects
 

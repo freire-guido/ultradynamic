@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getProjectById } from "@/lib/projects";
-import ProjectSVG from "@/components/ProjectSVG";
+import AnimatedHeader from "@/components/AnimatedHeader";
 
-export default function ProjectPage({ params }: { params: { id: string } }) {
-  const project = getProjectById(params.id);
+export default async function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const project = getProjectById(id);
   
   if (!project) {
     notFound();
@@ -32,48 +33,39 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
         </div>
       </nav>
 
+      {/* Animated Header */}
+      <AnimatedHeader projectName={project.name} tags={project.tags} />
+
       {/* Project Content */}
-      <section className="pt-40 pb-24 px-8">
+      <section className="py-24 px-8">
         <div className="max-w-5xl mx-auto">
-          {/* Back Link */}
-          <Link 
-            href="/#projects" 
-            className="inline-flex items-center gap-2 text-sm text-black/50 hover:text-black/80 transition-colors mb-12"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to Projects
-          </Link>
-
-          {/* Project Header */}
-          <div className="mb-16">
-            <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-6">
-              {project.name}
-            </h1>
-            <div className="flex flex-wrap gap-2 mb-8">
-              {project.tags.map((tag, idx) => (
-                <span 
-                  key={idx}
-                  className="text-xs uppercase tracking-wider px-4 py-2 bg-black/[0.04] text-black/50 font-medium"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Project Graphic */}
-          <div className="mb-20 border border-black/[0.08] p-16 bg-black/[0.01]">
-            <ProjectSVG projectId={project.id} className="w-full h-auto text-black/60" />
-          </div>
-
           {/* Project Description */}
-          <div className="max-w-3xl">
-            <h2 className="text-2xl font-light mb-6 text-black/80">Overview</h2>
-            <p className="text-lg leading-relaxed text-black/60 mb-8">
+          <div className="mb-20">
+            <h2 className="text-3xl font-light mb-8 text-black/80">Overview</h2>
+            <p className="text-xl leading-relaxed text-black/60 mb-12">
               {project.longDescription}
             </p>
+          </div>
+
+          {/* Additional Content Sections */}
+          <div className="space-y-20">
+            <div>
+              <h2 className="text-2xl font-light mb-6 text-black/80">Approach</h2>
+              <p className="text-lg leading-relaxed text-black/60">
+                Our approach combines rigorous technical execution with thoughtful consideration 
+                of real-world impact. We build systems that operate autonomously, adapt intelligently, 
+                and align with long-term human values.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-light mb-6 text-black/80">Impact</h2>
+              <p className="text-lg leading-relaxed text-black/60">
+                By transforming how critical infrastructure operates, we create compounding effects 
+                that reshape entire industries. Each system we build is designed to scale, adapt, 
+                and improve autonomously.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -102,4 +94,3 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
     </div>
   );
 }
-
