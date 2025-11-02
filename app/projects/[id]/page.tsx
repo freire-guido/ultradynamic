@@ -34,7 +34,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
       </nav>
 
       {/* Animated Header */}
-      <AnimatedHeader projectName={project.name} tags={project.tags} />
+      <AnimatedHeader projectName={project.name} tags={project.tags} projectId={project.id} />
 
       {/* Project Content */}
       <section className="py-24 px-8">
