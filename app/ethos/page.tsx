@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function JoinPage() {
+export default function EthosPage() {
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Navigation */}
@@ -27,44 +27,56 @@ export default function JoinPage() {
       <section className="pt-40 pb-24 px-8">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-12">
-            Join Us
+            Ethos
           </h1>
           
-          <div className="space-y-8 text-lg leading-relaxed">
-            <div className="border-l-4 border-black/10 pl-6 py-2">
-              <p className="text-black/80 font-medium mb-2">
-                We are currently not hiring.
-              </p>
-              <p className="text-black/60">
-                If you're deeply aligned with our mission and have exceptional capabilities 
-                in AI systems, automation, or related fields, we encourage you to reach out 
-                informally through our contact channels.
+          <div className="space-y-8 text-lg leading-relaxed text-black/60">
+            <p>
+              At Ultradynamic Systems, our work is guided by a set of core principles that shape how 
+              we approach problems, build systems, and interact with the world.
+            </p>
+
+            <div>
+              <h2 className="text-2xl font-light mb-4 text-black/80 mt-12">Technical Rigor</h2>
+              <p>
+                We believe in the power of careful thought and rigorous execution. Every system we build 
+                is grounded in solid engineering principles and informed by the latest research. We value 
+                depth over breadth, and substance over spectacle.
               </p>
             </div>
 
-            {/* Application Link */}
-            <div className="pt-4">
-              <a
-                href="https://ultradynamic.typeform.com/to/YOUR_FORM_ID"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-8 py-4 bg-black text-white hover:bg-black/90 transition-colors duration-200 text-base font-medium"
-              >
-                Submit Application
-              </a>
-            </div>
-            
-            <div className="pt-8">
-              <p className="text-black/60 mb-6">
-                We look for people who combine technical excellence with independent thinking, 
-                who can operate with minimal structure while maintaining high standards, and who 
-                are genuinely excited about building systems that reshape industries.
+            <div>
+              <h2 className="text-2xl font-light mb-4 text-black/80 mt-12">Autonomous Operation</h2>
+              <p>
+                We build systems that operate independently and adapt to changing conditions. Rather than 
+                requiring constant human intervention, our systems learn, optimize, and improve on their own. 
+                This autonomy amplifies human capability rather than replacing it.
               </p>
-              
-              <p className="text-black/60">
-                Our team works across a broad range of technical domains—from deep learning 
-                and control theory to distributed systems and economic mechanisms. What unites 
-                us is a shared commitment to rigor, impact, and thoughtful innovation.
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-light mb-4 text-black/80 mt-12">Long-term Thinking</h2>
+              <p>
+                We focus on creating compounding effects that build over time. Short-term optimizations 
+                give way to fundamental improvements that reshape entire domains. We think in decades, not quarters.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-light mb-4 text-black/80 mt-12">Ethical Alignment</h2>
+              <p>
+                Every system we build is designed with human values at its core. We consider not just 
+                what is possible, but what is responsible. Safety, fairness, and alignment with human 
+                flourishing are not afterthoughts—they are fundamental constraints.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-light mb-4 text-black/80 mt-12">Independent Judgment</h2>
+              <p>
+                We maintain the freedom to pursue directions that others might overlook or dismiss. 
+                Conventional wisdom is a starting point, not a destination. We trust our judgment and 
+                are willing to take calculated risks on unproven approaches.
               </p>
             </div>
           </div>

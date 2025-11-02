@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { projects } from "@/lib/projects";
 
-export default function Home() {
+export default function PartnerLoginPage() {
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Navigation */}
@@ -11,9 +10,9 @@ export default function Home() {
             ULTRA<span className="font-light">DYNAMIC</span>
           </Link>
           <div className="flex gap-6 text-sm text-black/50">
-            <a href="#projects" className="hover:text-black/80 transition-colors duration-200">
+            <Link href="/#projects" className="hover:text-black/80 transition-colors duration-200">
               Projects
-            </a>
+            </Link>
             <Link href="/about" className="hover:text-black/80 transition-colors duration-200">
               About
             </Link>
@@ -24,48 +23,43 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Content */}
       <section className="pt-40 pb-24 px-8">
-        <div className="max-w-5xl mx-auto">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight mb-10 leading-[1.05]">
-            Making everything smarter with AI
+        <div className="max-w-md mx-auto">
+          <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-12">
+            Partner Login
           </h1>
-          <p className="text-lg md:text-xl text-black/50 max-w-2xl leading-relaxed">
-            Ultradynamic Systems builds intelligent systems that push people and processes 
-            to be smarter, more capable, and more effective.
-          </p>
-        </div>
-      </section>
+          
+          <div className="space-y-6">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-black/70 mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="w-full px-4 py-3 border border-black/[0.08] bg-white text-black focus:outline-none focus:border-black/20 transition-colors"
+                placeholder="partner@ultradynamic.capital"
+              />
+            </div>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-24 px-8">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl font-light mb-20 text-black/70 tracking-tight">Projects</h2>
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-            {projects.map((project, idx) => (
-              <Link
-                key={idx}
-                href={`/projects/${project.id}`}
-                className="border border-black/[0.08] p-10 hover:border-black/[0.12] transition-all duration-300 group cursor-pointer"
-              >
-                <h3 className="text-2xl font-medium mb-5 text-black/90 group-hover:text-black transition-colors duration-300">
-                  {project.name}
-                </h3>
-                <p className="text-black/50 mb-8 leading-relaxed text-[15px]">
-                  {project.shortDescription}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, tagIdx) => (
-                    <span 
-                      key={tagIdx}
-                      className="text-[11px] uppercase tracking-wider px-3 py-1.5 bg-black/[0.04] text-black/50 font-medium"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </Link>
-            ))}
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-black/70 mb-2">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                className="w-full px-4 py-3 border border-black/[0.08] bg-white text-black focus:outline-none focus:border-black/20 transition-colors"
+                placeholder="Enter your password"
+              />
+            </div>
+
+            <button className="w-full px-8 py-4 bg-black text-white hover:bg-black/90 transition-colors duration-200 text-base font-medium">
+              Sign In
+            </button>
           </div>
         </div>
       </section>

@@ -111,8 +111,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
               <p>Building the future of intelligent systems.</p>
             </div>
           </div>
-          <div className="pt-8 border-t border-black/[0.08] text-xs text-black/30">
-            © {new Date().getFullYear()} Ultradynamic Systems. All rights reserved.
+          <div className="pt-8 border-t border-black/[0.08] flex flex-col gap-4">
+            <div className="flex flex-wrap gap-4 text-xs text-black/30">
+              <Link href="/privacy" className="hover:text-black/50 transition-colors">Privacy</Link>
+              <Link href="/terms" className="hover:text-black/50 transition-colors">Terms</Link>
+              <Link href="/ethos" className="hover:text-black/50 transition-colors">Ethos</Link>
+              <Link href="/uds-login" className="hover:text-black/50 transition-colors">UDS Login</Link>
+            </div>
+            <div className="text-xs text-black/30">
+              © 2024 Ultradynamic Systems. All rights reserved.
+            </div>
           </div>
         </div>
       </footer>
