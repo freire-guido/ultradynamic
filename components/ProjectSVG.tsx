@@ -1,10 +1,12 @@
+import React from 'react';
+
 interface ProjectSVGProps {
   projectId: string;
   className?: string;
 }
 
 export default function ProjectSVG({ projectId, className = "" }: ProjectSVGProps) {
-  const svgs: Record<string, JSX.Element> = {
+  const svgs: Record<string, React.ReactElement> = {
     ultravending: (
       <svg viewBox="0 0 400 300" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
         {/* Vending Machine Body */}

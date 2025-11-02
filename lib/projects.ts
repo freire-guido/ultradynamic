@@ -4,6 +4,7 @@ export interface Project {
   shortDescription: string;
   longDescription: string;
   tags: string[];
+  githubLinks?: string[];
 }
 
 export const projects: Project[] = [
@@ -12,14 +13,20 @@ export const projects: Project[] = [
     name: "Ultravending",
     shortDescription: "Autonomous retail through fully automated vending operations.",
     longDescription: "Transforming retail infrastructure with fully autonomous vending systems. Every aspect of the operation—from supply chain management to customer interaction—is handled by intelligent agents that adapt and optimize in real-time.",
-    tags: ["Logistics", "Automation", "Retail"]
+    tags: ["Logistics", "Automation", "Retail"],
+    githubLinks: ["https://github.com/freire-guido/ultravending"]
   },
   {
     id: "ultragaucho",
     name: "Ultragaucho",
     shortDescription: "Advancing regional AI capabilities through rigorous evaluation and quality datasets.",
     longDescription: "Building the tools and infrastructure needed to ensure AI systems understand and reflect regional contexts. We create benchmarks, evaluations, and datasets that enable culturally-aware and linguistically-competent models.",
-    tags: ["AI Evaluation", "Benchmarks", "LLMs"]
+    tags: ["AI Evaluation", "Benchmarks", "LLMs"],
+    githubLinks: [
+      "https://github.com/freire-guido/trucobench",
+      "https://github.com/freire-guido/phrenology",
+      "https://github.com/freire-guido/diputados-datos"
+    ]
   },
   {
     id: "ultrastudy",
