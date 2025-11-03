@@ -4,7 +4,7 @@ export default function TermsPage() {
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full border-b border-black/[0.08] bg-white/70 backdrop-blur-xl z-50">
+      <nav className="fixed top-0 w-full border-b border-black/[0.08] bg-white/40 backdrop-blur-xl z-50">
         <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
           <Link href="/" className="text-lg font-semibold tracking-tight hover:opacity-70 transition-opacity">
             ULTRA<span className="font-light">DYNAMIC</span>
