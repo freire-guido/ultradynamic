@@ -10,6 +10,7 @@ interface AnimatedHeaderProps {
 
 export default function AnimatedHeader({ projectName, tags, projectId }: AnimatedHeaderProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mousePosRef = useRef({ x: -1000, y: -1000 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -24,6 +25,17 @@ export default function AnimatedHeader({ projectName, tags, projectId }: Animate
     };
     resize();
     window.addEventListener("resize", resize);
+
+    // Mouse tracking
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mousePosRef.current = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
 
     // Different animations based on project ID
     const animations: Record<string, () => void> = {
@@ -56,10 +68,16 @@ export default function AnimatedHeader({ projectName, tags, projectId }: Animate
               const rotX = centerX + Math.cos(rotatedAngle) * dist;
               const rotY = centerY + Math.sin(rotatedAngle) * dist;
 
+              // Mouse influence
+              const dxMouse = rotX - mousePosRef.current.x;
+              const dyMouse = rotY - mousePosRef.current.y;
+              const distToMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+              const mouseInfluence = distToMouse < 100 ? (100 - distToMouse) / 100 : 0;
+
               const opacity = Math.abs(Math.sin(dist / 100 + angle * 5)) * 0.3;
-              ctx.fillStyle = `rgba(0, 0, 0, ${opacity})`;
+              ctx.fillStyle = `rgba(0, 0, 0, ${opacity + mouseInfluence * 0.2})`;
               ctx.beginPath();
-              ctx.arc(rotX, rotY, 2, 0, Math.PI * 2);
+              ctx.arc(rotX, rotY, 2 + mouseInfluence * 3, 0, Math.PI * 2);
               ctx.fill();
             }
           }
@@ -102,8 +120,21 @@ export default function AnimatedHeader({ projectName, tags, projectId }: Animate
           ctx.clearRect(0, 0, canvas.width, canvas.height);
 
           particles.forEach((particle) => {
+            // Mouse attraction/repulsion
+            const dx = mousePosRef.current.x - particle.x;
+            const dy = mousePosRef.current.y - particle.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 150 && dist > 0) {
+              particle.vx += (dx / dist) * 0.05;
+              particle.vy += (dy / dist) * 0.05;
+            }
+
             particle.x += particle.vx;
             particle.y += particle.vy;
+
+            // Damping
+            particle.vx *= 0.98;
+            particle.vy *= 0.98;
 
             if (particle.x < 0) particle.x = canvas.width;
             if (particle.x > canvas.width) particle.x = 0;
@@ -126,9 +157,15 @@ export default function AnimatedHeader({ projectName, tags, projectId }: Animate
           }
 
           particles.forEach((particle) => {
-            ctx.fillStyle = `rgba(0, 0, 0, ${particle.opacity})`;
+            // Mouse glow
+            const dx = mousePosRef.current.x - particle.x;
+            const dy = mousePosRef.current.y - particle.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const glow = dist < 80 ? (80 - dist) / 80 : 0;
+
+            ctx.fillStyle = `rgba(0, 0, 0, ${particle.opacity + glow * 0.2})`;
             ctx.beginPath();
-            ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            ctx.arc(particle.x, particle.y, particle.size + glow * 2, 0, Math.PI * 2);
             ctx.fill();
           });
 
@@ -147,14 +184,23 @@ export default function AnimatedHeader({ projectName, tags, projectId }: Animate
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           time += 0.02;
 
+          // Calculate mouse influence on waves
+          const mouseY = mousePosRef.current.y;
+          const distFromCenter = Math.abs(mouseY - canvas.height / 2);
+          const waveInfluence = 1 + (distFromCenter < 200 ? (200 - distFromCenter) / 200 * 0.5 : 0);
+
           for (let i = 0; i < waveCount; i++) {
             const y = waveSpacing + i * waveSpacing;
-            const amplitude = 30 + Math.sin(time + i) * 10;
+            const amplitude = (30 + Math.sin(time + i) * 10) * waveInfluence;
             const frequency = 0.02 + (i * 0.003);
             const phase = time * 0.5 + i * 0.5;
 
-            ctx.strokeStyle = `rgba(0, 0, 0, ${0.15 - i * 0.01})`;
-            ctx.lineWidth = 1.5;
+            // Distance from mouse to this wave
+            const distToWave = Math.abs(mouseY - y);
+            const mouseInfluence = distToWave < 100 ? (100 - distToWave) / 100 : 0;
+
+            ctx.strokeStyle = `rgba(0, 0, 0, ${0.15 - i * 0.01 + mouseInfluence * 0.1})`;
+            ctx.lineWidth = 1.5 + mouseInfluence * 0.5;
             ctx.beginPath();
 
             for (let x = 0; x < canvas.width; x += 2) {
@@ -171,9 +217,9 @@ export default function AnimatedHeader({ projectName, tags, projectId }: Animate
             // Add dots along the wave
             for (let x = 0; x < canvas.width; x += 40) {
               const pointY = y + Math.sin(x * frequency + phase) * amplitude;
-              ctx.fillStyle = `rgba(0, 0, 0, ${0.2 - i * 0.015})`;
+              ctx.fillStyle = `rgba(0, 0, 0, ${0.2 - i * 0.015 + mouseInfluence * 0.15})`;
               ctx.beginPath();
-              ctx.arc(x, pointY, 2, 0, Math.PI * 2);
+              ctx.arc(x, pointY, 2 + mouseInfluence * 2, 0, Math.PI * 2);
               ctx.fill();
             }
           }
@@ -195,14 +241,20 @@ export default function AnimatedHeader({ projectName, tags, projectId }: Animate
           const centerX = canvas.width / 2;
           const centerY = canvas.height / 2;
 
+          // Mouse distance from center
+          const dx = mousePosRef.current.x - centerX;
+          const dy = mousePosRef.current.y - centerY;
+          const mouseDist = Math.sqrt(dx * dx + dy * dy);
+          const mouseInfluence = mouseDist < 200 ? (200 - mouseDist) / 200 : 0;
+
           // Draw concentric circles
           for (let i = 0; i < circles; i++) {
             const radius = 60 + i * 60;
             const expansion = Math.sin(time * 0.5 + i * 0.5) * 20;
-            const finalRadius = radius + expansion;
+            const finalRadius = radius + expansion + mouseInfluence * 15;
 
-            ctx.strokeStyle = `rgba(0, 0, 0, ${0.15 - i * 0.02})`;
-            ctx.lineWidth = 1.5;
+            ctx.strokeStyle = `rgba(0, 0, 0, ${0.15 - i * 0.02 + mouseInfluence * 0.05})`;
+            ctx.lineWidth = 1.5 + mouseInfluence * 0.5;
             ctx.beginPath();
             ctx.arc(centerX, centerY, finalRadius, 0, Math.PI * 2);
             ctx.stroke();
@@ -215,14 +267,20 @@ export default function AnimatedHeader({ projectName, tags, projectId }: Animate
             const x = centerX + Math.cos(angle) * radius;
             const y = centerY + Math.sin(angle) * radius;
 
-            ctx.fillStyle = `rgba(0, 0, 0, ${0.4})`;
+            // Mouse glow on particles
+            const dx2 = mousePosRef.current.x - x;
+            const dy2 = mousePosRef.current.y - y;
+            const distToParticle = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+            const glow = distToParticle < 80 ? (80 - distToParticle) / 80 : 0;
+
+            ctx.fillStyle = `rgba(0, 0, 0, ${0.4 + glow * 0.3})`;
             ctx.beginPath();
-            ctx.arc(x, y, 3, 0, Math.PI * 2);
+            ctx.arc(x, y, 3 + glow * 2, 0, Math.PI * 2);
             ctx.fill();
           }
 
           // Connection lines
-          ctx.strokeStyle = "rgba(0, 0, 0, 0.08)";
+          ctx.strokeStyle = `rgba(0, 0, 0, ${0.08 + mouseInfluence * 0.04})`;
           ctx.lineWidth = 0.5;
           for (let i = 0; i < 12; i++) {
             const angle1 = (time + i * (Math.PI / 6)) * 0.3;
@@ -251,6 +309,7 @@ export default function AnimatedHeader({ projectName, tags, projectId }: Animate
 
     return () => {
       window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, [projectId]);
 
